@@ -1,0 +1,8 @@
+En esta segunda versión, se realizaron los siguientes avances del juego:
+
+1- Se ordenaron los distintos archivos a ocupar de forma sistemática: se creo una carpeta con las librerías del curso a ocupar (libs).
+
+2- Se organizó la lógica del juego a través del patrón de diseño modelo-vista-controlador: se creo un archivo llamado "model.py" donde se almacena toda la información del modelo del juego a través de distintas clases con sus respectivos métodos para realizar cambios en el modelo; se creó un archivo llamado "controller.py" donde se almacena toda la lógica referida a las entradas del usuario y a los parámetros asociados a estos: y, finalmente, el archivo "tarea1b.py" funciona como la vista, es decir, en este archivo se van generando las distintas vistas asociadas los cambios en el modelo generados por las acciones que realice el usuario y por las acciones inherentes del juego.
+
+3- Se colocó una nave enemiga en la parte superior de la pantalla y se generó un movimiento asociado a este enenemigo.
+
