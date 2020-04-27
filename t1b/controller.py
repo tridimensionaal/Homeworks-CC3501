@@ -8,6 +8,9 @@ class Controller:
         self.dx = 0
         #Movimiento en el eje y
         self.dy = 0
+        #Disparo bala
+        self.shot = False
+
 
     def mod(self):
         if controller.dx < -1:
@@ -18,6 +21,7 @@ class Controller:
             controller.dy = 1.8
         if controller.dy < 0:
             controller.dy = 0
+        controller.shot = False
 
 # global controller as communication with the callback function
 controller = Controller()
@@ -43,6 +47,10 @@ def on_key(window, key, scancode, action, mods):
     #Al apretar la tecla A, la nave se mueve hacia la izquierda
     elif key == glfw.KEY_A:
         controller.dx += -0.1
+    #Al apretar la tecla SPACE, la nave dispara
+    elif key == glfw.KEY_SPACE:
+        controller.shot = True
+
 
     #Al apretar la tecla ESCAPE, se cierra la ventana y termina el programa
     elif key == glfw.KEY_ESCAPE:

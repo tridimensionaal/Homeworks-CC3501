@@ -4,6 +4,7 @@ import OpenGL.GL.shaders
 import numpy as np
 import sys
 import os
+import time
 from PIL import Image
 
 from libs import easy_shaders as es
@@ -59,7 +60,8 @@ if __name__ == "__main__":
     # Telling OpenGL to use our shader program
     glUseProgram(pipeline.shaderProgram)
 
-    spaceInvaders = model.Model()
+    n = 5
+    spaceInvaders = model.Model(n)
     #Se genera la animación
     while not glfw.window_should_close(window):
 
@@ -71,12 +73,16 @@ if __name__ == "__main__":
 
         # Clearing the screen in both, color and depth
         glClear(GL_COLOR_BUFFER_BIT)
+        
+        #
 
         #Se mueve la nave, dependiendo del valor controller.dx y controller.dy
-        spaceInvaders.update(controller.dx,controller.dy)
-
+        spaceInvaders.update(controller.dx,controller.dy,controller.shot)
         sg.drawSceneGraphNode(spaceInvaders.scene, pipeline,"transform")
         # Once the render is done, buffers are swapped, showing only the complete scene.
         glfw.swap_buffers(window)
 
+        if spaceInvaders.enemyslive == 0:
+            break
     glfw.terminate()
+    print("Game over")
