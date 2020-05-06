@@ -60,7 +60,7 @@ if __name__ == "__main__":
     # Telling OpenGL to use our shader program
     glUseProgram(pipeline.shaderProgram)
 
-    n = 5
+    n = 100
     spaceInvaders = model.Model(n)
     #Se genera la animación
     while not glfw.window_should_close(window):
@@ -73,9 +73,7 @@ if __name__ == "__main__":
 
         # Clearing the screen in both, color and depth
         glClear(GL_COLOR_BUFFER_BIT)
-        
         #
-
         #Se mueve la nave, dependiendo del valor controller.dx y controller.dy
         spaceInvaders.update(controller.dx,controller.dy,controller.shot)
         sg.drawSceneGraphNode(spaceInvaders.scene, pipeline,"transform")
