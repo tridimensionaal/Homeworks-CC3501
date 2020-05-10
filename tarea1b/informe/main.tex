@@ -1,0 +1,126 @@
+% Template:     Informe LaTeX
+% Documento:    Archivo principal
+% Versión:      6.8.3 (22/04/2020)
+% Codificación: UTF-8
+%
+% Autor: Pablo Pizarro R.
+%        Facultad de Ciencias Físicas y Matemáticas
+%        Universidad de Chile
+%        pablo@ppizarror.com
+%
+% Manual template: [https://latex.ppizarror.com/informe]
+% Licencia MIT:    [https://opensource.org/licenses/MIT]
+
+% CREACIÓN DEL DOCUMENTO
+\documentclass[letterpaper,11pt,oneside]{article}
+
+% INFORMACIÓN DEL DOCUMENTO
+\def\titulodelinforme {Informe Tarea N°1}
+\def\temaatratar {OpenGL 2D}
+\def\autordeldocumento {Matías Seda}
+\def\nombredelcurso {Modelación y computación Gráfica para Ingenieros}
+\def\codigodelcurso {CC3501-1}
+
+\def\nombreuniversidad {Universidad de Chile}
+\def\nombrefacultad {Facultad de Ciencias Físicas y Matemáticas}
+\def\departamentouniversidad {Departamento de Ciencias de la Computación}
+\def\imagendepartamento {departamentos/fcfm}
+\def\imagendepartamentoescala {0.2}
+\def\localizacionuniversidad {Santiago, Chile}
+
+% INTEGRANTES, PROFESORES Y FECHAS
+\def\tablaintegrantes {
+\begin{tabular}{ll}
+	Integrantes:
+	& \begin{tabular}[t]{l}
+		Matías Seda 
+	\end{tabular} \\
+	Profesor:
+	& \begin{tabular}[t]{l}
+        Daniel Calderón
+	\end{tabular} \\
+	Auxiliar:
+	& \begin{tabular}[t]{l}
+        Alonso Utreras \\
+        Nelson Marambio
+	\end{tabular} \\
+	Ayudantes:
+	& \begin{tabular}[t]{l}
+        Beatriz Grabaloza \\
+        Heinich Porro Sufan \\
+        Nadia Decar \\
+        Tomas Calderón
+	\end{tabular} \\
+	\multicolumn{2}{l}{Fecha de entrega: \today} \\
+	\multicolumn{2}{l}{\localizacionuniversidad}
+\end{tabular}
+}
+
+% CONFIGURACIONES
+\input{lib/config}
+
+% IMPORTACIÓN DE LIBRERÍAS
+\input{lib/env/imports}
+
+% IMPORTACIÓN DE FUNCIONES Y ENTORNOS
+\input{lib/cmd/all}
+
+% IMPORTACIÓN DE ESTILOS
+\input{lib/style/all}
+
+% CONFIGURACIÓN INICIAL DEL DOCUMENTO
+\input{lib/cfg/init}
+
+% INICIO DE LAS PÁGINAS
+\begin{document}
+	
+% PORTADA
+\input{lib/page/portrait} % Se puede borrar
+
+% CONFIGURACIÓN DE PÁGINA Y ENCABEZADOS
+\input{lib/cfg/page}
+
+% CONFIGURACIONES FINALES
+\input{lib/cfg/final}
+
+% ======================= INICIO DEL DOCUMENTO =======================
+\begin{enumerate}
+    \item \textbf{\underline{Solución propuesta:}} 
+
+        El programa implementa el patrón de diseño \textit{Modelo-Vista-Controlador}. A grandes, la lógica del programa es la siguiente;
+        \insertimage[]{img/1.png}{width=10cm}{Lógica del programa.}
+
+    \item \textbf{\underline{Instrucciones de ejecución:}} 
+
+        Via terminal, se debe dirigir a la carpeta \textit{tarea1b} que contiene el programa y ejecutar via terminal el archivo \textit{tarea1b.py} agregando un número que representa la cantidad de naves enemigas que se desean colocar en el juego. En la siguiente foto se ejemplifica lo dicho, agregando 10 naves enemigas:
+
+        \insertimage[]{img/2.png}{width=10cm}{Ejecuntado el programa vía terminal.}
+
+
+        Ahora, cuando se ha ejecutado el programa, para mover la nave se utilizan las teclas \textit{W}, \textit{A}, \textit{D} y \textit{S}. La tecla \textit{W} es para mover la nave hacia adelante, la tecla \textit{A} es para mover la nave hacia la izquierda, la tecla \textit{D} es para mover la nave hacia la derecha y la tecla \textit{S} es para mover la nave hacia atrás. Apretando la tecla \textit{SPACE} la nave dispara y con la tecla \textit{ESC} se cierra el programa.
+
+
+    \item \textbf{\underline{Resultados:}} 
+
+        Inicialmente, el juego empieza con 1 nave ememiga.
+        \insertimage[]{img/3.png}{width=10cm}{Situación inicial del juego.}
+
+        En el trasncurso del juego, van apareciendo más naves enemigas (hasta el máximo dado al ejecutar el programa). La nave del jugador tiene que disparar un disparado y alcanzar una nave enemiga para eliminarla.
+        \insertimage[]{img/4.png}{width=10cm}{El disparo rojo es un disparo de la nave del jugador.}
+
+        Las naves enemigas, constantemente se desplazan hacia el lado y al llegar al borde derecho, se desplazan hacia abajo. Las naves enemigas cada cierto tiempo, disparan un disparo en línea recta. 
+        \insertimage[]{img/5.png}{width=10cm}{Los disparos azules son disparos de las naves enemigas.}
+
+        El jugador gana cuando elimina todas las naves enemigas.
+        \insertimage[]{img/6.png}{width=10cm}{Display cuando el jugador gana.}
+
+        El jugador pierda cuando es alcanzado 3 veces por disparos enemigos, cuando choca contra una nave enemiga o cuando una nave enemiga alcanza la parte inferior de la pantalla.
+        \insertimage[]{img/7.png}{width=10cm}{Display cuando pierde el jugador.}
+
+\end{enumerate}
+
+
+
+
+% FIN DEL DOCUMENTO
+\end{document}

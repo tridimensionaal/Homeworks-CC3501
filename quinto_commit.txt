@@ -1,0 +1,17 @@
+En esta quinta versión, se realizaron los siguientes avances del juego:
+
+1- Se programó la lógica de colisiones entre la nave del jugador y las naves enemigas.
+
+2- Respecto a lo anterior, se estableció que, cada vez que la nave del jugador choca contra una name enemiga, la nave del jugador pierde todas sus vidas.
+
+3- Se estableció la forma de ganar o perder el juego. Se gana si se destruyen todas la naves enemigas. Se pierde si el jugador pierde sus 3 vidas o si una vane enemiga llega a la parte inferior de la pantalla.
+
+4- Se programó la lógica para que el usuario, al iniciar el juego vía terminal, eliga la cantidad de naves enemigas que desea que el juego implemente.
+
+5- Finalmente, se revisaron detalles y aspectos menores para así, tener el juego en su funcionalidad final.
+
+
+
+
+
+
