@@ -44,7 +44,7 @@ def windowConf():
     glfw.set_key_callback(window, on_key)
 
     # Setting up the clear screen color
-    glClearColor(0.1, 0.1, 0.1, 1.0)
+    glClearColor(0.7, 0.7, 0.7, 1.0)
 
     # Enabling transparencies
     glEnable(GL_BLEND)
@@ -61,7 +61,9 @@ if __name__ == "__main__":
 
     # Assembling the shader program
     pipeline = es.SimpleModelViewProjectionShaderProgram()
-    lightingPipeline = light_s.SimpleGouraudShaderProgram()
+    pipeline = es.SimpleTextureModelViewProjectionShaderProgram()
+    lightingPipeline = light_s.SimpleTextureGouraudShaderProgram()
+
 
     # As we work in 3D, we need to check which part is in front,
     # and which one is at the back
@@ -105,14 +107,14 @@ if __name__ == "__main__":
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ld"), 1.0, 1.0, 1.0)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ls"), 1.0, 1.0, 1.0)
 
-        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ka"), 0.6, 0.6, 0.6)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ka"), 1.0, 1.0, 1.0)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Kd"), 1.0, 1.0, 1.0)
-        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ks"), 0.4, 0.4, 0.4)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ks"), 1.0, 1.0, 1.0)
 
 
         # TO DO: Explore different parameter combinations to understand their effect!
 
-        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "lightPosition"), 3, 3, 3)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "lightPosition"), car.x-1, car.y-1, 4)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "viewPosition"), viewPos[0], viewPos[1], viewPos[2])
         glUniform1ui(glGetUniformLocation(lightingPipeline.shaderProgram, "shininess"), 100)
 

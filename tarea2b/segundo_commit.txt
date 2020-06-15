@@ -1,0 +1,10 @@
+En esta segunda versión, se realizaron los siguientes avances del juego:
+
+1- Se mejoró el modelo del auto a través del uso de texturas e incorporación de otros elementos.
+
+2- Se generaron las estructuras para crear y almacenar la pista
+
+3- Se creo el modelo de una pista básica en 2d
+
+
+

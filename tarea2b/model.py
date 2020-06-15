@@ -10,9 +10,19 @@ from libs import local_shapes as ls
 class Car:
     def __init__(self):
         
-        gpuSphere= es.toGPUShape(ls.generateNormalSphere(30,30))
+        gpuSphere= es.toGPUShape(ls.generateNormalSphere(30,30,"images/pink1.jpg"), GL_REPEAT, GL_LINEAR)
+        gpuWheel = es.toGPUShape(ls.generateTextureNormalsCylinder(20,"images/black1.png",2,1,0),GL_REPEAT, GL_LINEAR)
 
-        gpuWheel = es.toGPUShape(ls.generateNormalsCylinder(20,[0,0,0],2,1,0))
+        gpuHead = es.toGPUShape(bs.createTextureNormalsCube("images/carita.jpg"),GL_REPEAT, GL_LINEAR)
+
+        #
+        head = sg.SceneGraphNode("head")
+        head.transform = tr.uniformScale(4)
+        head.childs = [gpuHead]
+
+        translatedHead = sg.SceneGraphNode("traslatedHead")
+        translatedHead.transform = tr.translate(0,0,4)
+        translatedHead.childs = [head]
 
         #
         sphere = sg.SceneGraphNode("sphere")
@@ -38,7 +48,7 @@ class Car:
 
         group = sg.SceneGraphNode("group")
         group.transform = tr.matmul([tr.translate(0,0,0),tr.rotationZ(0)])
-        group.childs = [sphere, translatedleftwheel, translatedrightwheel]
+        group.childs = [translatedHead, sphere, translatedleftwheel, translatedrightwheel]
 
         self.node = group
         self.x = 0
@@ -83,9 +93,6 @@ class Car:
             self.theta += self.dtheta
             if self.theta > np.pi/2:
                 self.theta = np.pi/2
-
-
- 
 
 
     def update(self,r,theta):

@@ -50,7 +50,6 @@ def rotationY(theta):
         [-sin_theta,0,cos_theta,0],
         [0,0,0,1]], dtype = np.float32)
 
-
 def rotationZ(theta):
     sin_theta = np.sin(theta)
     cos_theta = np.cos(theta)

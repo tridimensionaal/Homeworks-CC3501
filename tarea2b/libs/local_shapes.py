@@ -291,7 +291,7 @@ def generateTextureNormalsCylinder(latitudes, file_name, R = 1.0, z_top=1.0, z_b
 
     return bs.Shape(vertices, indices,file_name)
 
-def generateNormalSphere(nTheta, nPhi):
+def generateNormalSphere(nTheta, nPhi, file_name):
     vertices = []
     indices = []
 
@@ -329,12 +329,28 @@ def generateNormalSphere(nTheta, nPhi):
             c = np.array([cos_phi_next * sin_theta     , sin_phi_next * sin_theta     , cos_theta])
             d = np.array([cos_phi * sin_theta          , sin_phi * sin_theta          , cos_theta])
 
-            _vertex, _indices = createColorNormalsQuadIndexation(start_index,a,b,c,d, [1,0,0])
+            _vertex, _indices = createTextureNormalsQuadIndexation(start_index,a,b,c,d)
 
             vertices += _vertex
             indices  += _indices
             start_index += 4
 
-    return bs.Shape(vertices, indices)
+    return bs.Shape(vertices, indices, file_name)
+
+def generateNormalTrack():
+    global nodes1
+    global nodes2 
+
+
+
+    vertices = []
+    indices = []
+
+    start_index = 0
+
+
+
+
+
 
 
