@@ -4,6 +4,8 @@ import numpy as np
 
 from libs import basic_shapes as bs
 
+from libs import nonuniform_splines as no
+
 
 def createColorTriangleIndexation(start_index, a, b, c, color):
     # Defining locations and colors for each vertex of the shape    
@@ -337,20 +339,69 @@ def generateNormalSphere(nTheta, nPhi, file_name):
 
     return bs.Shape(vertices, indices, file_name)
 
-def generateNormalTrack():
-    global nodes1
-    global nodes2 
+def generateNormalTrack(l1, l2, n, file_name):
+    l1 *= n
+    l2 *= n
 
+    nodes = np.ndarray((12),dtype=no.Node)
 
+    for i in range(len(l1)):
+        point = l1[i]
+        node = no.Node(point)
+        nodes[i] = node
+    nodes1 = no.Nodes(nodes)
+
+    nodes = np.ndarray((12),dtype=no.Node)
+    for i in range(len(l2)):
+        point = l2[i]
+        node = no.Node(point)
+        nodes[i] = node
+
+    nodes2 = no.Nodes(nodes)
+
+    points1 =[]
+    for node in nodes1.nodes:
+        for point in node.list:
+            points1 += [point]
+
+    points2 = []
+    for node in nodes2.nodes:
+        for point in node.list:
+            points2 += [point]
 
     vertices = []
     indices = []
 
     start_index = 0
 
+    large = len(points1)
 
+    for i in range(large):
+        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,points1[i], points1[(i+1)%large],points2[(i+1)%large],points2[i])
 
+        vertices += _vertex
+        indices += _indices
+        start_index += 4
 
+    for i in range(large):
+        p1 = [points1[i][0], points1[i][1], points1[i][2] - 10]
+        p2 = [points1[(i+1)%large][0], points1[(i+1)%large][1], points1[(i+1)%large][2] - 10]
 
+        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,points1[i], points1[(i+1)%large],p2,p1)
+        vertices += _vertex
+        indices  += _indices
+        start_index += 4
 
+    for i in range(large):
+        p1 = [points2[i][0], points2[i][1], points2[i][2] - 10]
+        p2 = [points2[(i+1)%large][0], points2[(i+1)%large][1], points2[(i+1)%large][2] - 10]
+
+        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,points2[i], points2[(i+1)%large],p2,p1)
+        vertices += _vertex
+        indices  += _indices
+        start_index += 4
+
+ 
+
+    return points1, points2, bs.Shape(vertices,indices,file_name)
 

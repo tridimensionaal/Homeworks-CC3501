@@ -17,7 +17,6 @@ def getPostionCubic(p1,t1,p2,t2,t):
     H = hermiteMatrix(p1,p2,t1,t2)
     return np.matmul(ts,H)
 
-
 class Node:
     def __init__(self, position):
         self.position = np.array(position)
@@ -29,11 +28,11 @@ class Node:
 class Nodes:
     def __init__(self,nodes):
         n = len(nodes)
+        s = np.array([14,8,10,10,8,14,14,8,10,10,8,14])
+        s *= 4
 
         for i in range(n):
-            distance = np.linalg.norm(nodes[i].position - nodes[(i+1)%n].position)
-            nodes[i].distance = distance
-            nodes[i].steps = 2*int(round(distance))
+            nodes[i].steps = s[i]
 
         for i in range(n):
             if i == 0:
@@ -65,23 +64,24 @@ class Nodes:
             nodes[i].list = np.array(l)
 
         self.nodes = nodes
-
+'''
 p0 = np.array([8,0,0])
 p1 = np.array([5,6,0])
 p2 = np.array([3,3,0])
-p3 = np.array([0,7,0])
-p4 = np.array([-3,3,0])
+p3 = np.array([0,7,0.1])
+p4 = np.array([-3,3,0.1])
 p5 = np.array([-5,6,0])
-p6 = np.array([-8,0,0])
-p7 = np.array([-5,-6,0])
-p8 = np.array([-3,-3,0])
+p6 = np.array([-8,0,0.5])
+p7 = np.array([-5,-6,0.5])
+p8 = np.array([-3,-3,0.5])
 p9 = np.array([0,-7,0])
 p10 = np.array([3,-3,0])
 p11 = np.array([5,-6,0])
 
 points1 = np.array([p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11])
-nodes = np.ndarray((12),dtype=Node)
+points1 *= 50
 
+nodes = np.ndarray((12),dtype=Node)
 for i in range(len(points1)):
     point = points1[i]
     node = Node(point)
@@ -90,19 +90,20 @@ for i in range(len(points1)):
 nodes1 = Nodes(nodes)
 
 p0 = np.array([7,0,0])
-p1 = np.array([5,5,0])
-p2 = np.array([3,2,0])
-p3 = np.array([0,6,0])
-p4 = np.array([-3,2,0])
-p5 = np.array([-5,5,0])
-p6 = np.array([-7,0,0])
-p7 = np.array([-5,-5,0])
-p8 = np.array([-3,-2,0])
-p9 = np.array([0,-6,0])
-p10 = np.array([3,-2,0])
-p11 = np.array([5,-5,0])
+p1 = np.array([5,4,0])
+p2 = np.array([3,1,0])
+p3 = np.array([0,5,0.1])
+p4 = np.array([-3,1,0.1])
+p5 = np.array([-5,4,0])
+p6 = np.array([-7,0,0.5])
+p7 = np.array([-5,-4,0.5])
+p8 = np.array([-3,-1,0.5])
+p9 = np.array([0,-5,0])
+p10 = np.array([3,-1,0])
+p11 = np.array([5,-4,0])
 
 points2= np.array([p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11])
+points2 *= 50
 
 nodes = np.ndarray((12),dtype=Node)
 
@@ -112,4 +113,29 @@ for i in range(len(points2)):
     nodes[i] = node
 
 nodes2 = Nodes(nodes)
-x
+
+points1 =[]
+points2 = []
+x1 = []
+y1 = []
+x2 = []
+y2 = []
+
+for node in nodes1.nodes:
+    for point in node.list:
+        points1 += [point]
+        x1 += [point[0]]
+        y1 += [point[1]]
+        y1 += [point[2]]
+
+for node in nodes2.nodes:
+    for point in node.list:
+        points2 += [point]
+        x2 += [point[0]]
+        y2 += [point[1]]
+        z2 += [point[2]]
+
+plt.plot(x1,y1,'ro')
+plt.plot(x2,y2,'ro')
+plt.show()
+'''

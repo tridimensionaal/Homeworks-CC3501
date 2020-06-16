@@ -8,22 +8,24 @@ class PolarCamera:
 
     # Initializing a Camera which moves with polar coordinates 
     def __init__(self):
-        self.eyeX = -30
+        self.eyeX = -50
         self.eyeY = 0
-        self.eyeZ = 5
+        self.eyeZ = 0 
         self.atX = 0
         self.atY = 0
-        self.atZ = 1
+        self.atZ = 0
         self.viewPos = 0.0
         self.view = 0.0
     
-    def updateAt(self,x,y):
+    def updateAt(self,x,y,z):
         self.atX = x
         self.atY = y
+        self.atZ = z
 
-    def updateEye(self):
-        self.eyeX = -30 + self.atX
-        self.eyeY = self.atY
+    def updateEye(self,alpha):
+        self.eyeX = -75*np.cos(alpha)+ self.atX
+        self.eyeY = self.atY  - 75*np.sin(alpha)
+        self.eyeZ = self.atZ + 10
 
     def update_view(self):
         self.viewPos = np.array([self.eyeX, self.eyeY, self.eyeZ])

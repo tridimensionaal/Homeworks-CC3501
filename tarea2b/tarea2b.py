@@ -1,4 +1,3 @@
-# Auxiliar 5 new cilindro
 # coding=utf-8
 
 import glfw
@@ -60,17 +59,15 @@ if __name__ == "__main__":
     window = windowConf()
 
     # Assembling the shader program
-    pipeline = es.SimpleModelViewProjectionShaderProgram()
-    pipeline = es.SimpleTextureModelViewProjectionShaderProgram()
     lightingPipeline = light_s.SimpleTextureGouraudShaderProgram()
-
 
     # As we work in 3D, we need to check which part is in front,
     # and which one is at the back
 
     # Creating shapes on GPU memory
-    gpuAxis = es.toGPUShape(bs.createAxis(7))
-    car = model.Car()
+    track = model.Track()
+    car = model.Car(track)
+    sky = model.Skybox()
 
     while not glfw.window_should_close(window):
         # Using GLFW to check for input events
@@ -78,27 +75,15 @@ if __name__ == "__main__":
         key2(window)
 
         # Setting up the projection transform
-        projection = tr.perspective(60, float(width)/float(height), 0.1, 100)
+        projection = tr.perspective(60, float(width)/float(height), 0.1, 2000)
 
-        controller.camera().updateAt(car.x,car.y)
-        controller.camera().updateEye()
+        controller.camera().updateAt(car.x,car.y,car.z)
+        controller.camera().updateEye(car.theta)
         view = controller.camera().update_view()
         viewPos = controller.camera().view_pos()
 
         # Clearing the screen in both, color and depth
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-
-        # Filling or not the shapes depending on the controller state
-        if (controller.fillPolygon):
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
-        else:
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
-
-        glUseProgram(pipeline.shaderProgram)
-        glUniformMatrix4fv(glGetUniformLocation(pipeline.shaderProgram, "view"), 1, GL_TRUE, view)
-        glUniformMatrix4fv(glGetUniformLocation(pipeline.shaderProgram, "projection"), 1, GL_TRUE, projection)
-        glUniformMatrix4fv(glGetUniformLocation(pipeline.shaderProgram, "model"), 1, GL_TRUE, tr.identity())
-        pipeline.drawShape(gpuAxis, GL_LINES)
 
         glUseProgram(lightingPipeline.shaderProgram)
 
@@ -127,6 +112,8 @@ if __name__ == "__main__":
 
         car.update(controller.r, controller.theta)
         sg.drawSceneGraphNode(car.node,lightingPipeline,"model")
+        sg.drawSceneGraphNode(track.node,lightingPipeline,"model")
+        sg.drawSceneGraphNode(sky.node,lightingPipeline,"model")
 
 
         # Once the drawing is rendered, buffers are swap so an uncomplete drawing is never seen.
