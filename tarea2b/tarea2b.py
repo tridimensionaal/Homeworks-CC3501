@@ -68,6 +68,12 @@ if __name__ == "__main__":
     track = model.Track()
     car = model.Car(track)
     sky = model.Skybox()
+    box = model.Boxes(car)
+    sun = model.Sun()
+
+    xl = car.x
+    yl = car.y
+    zl = car.z
 
     while not glfw.window_should_close(window):
         # Using GLFW to check for input events
@@ -99,7 +105,7 @@ if __name__ == "__main__":
 
         # TO DO: Explore different parameter combinations to understand their effect!
 
-        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "lightPosition"), car.x-1, car.y-1, 4)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "lightPosition"), car.x, car.y, car.z + 8)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "viewPosition"), viewPos[0], viewPos[1], viewPos[2])
         glUniform1ui(glGetUniformLocation(lightingPipeline.shaderProgram, "shininess"), 100)
 
@@ -111,9 +117,13 @@ if __name__ == "__main__":
         glUniformMatrix4fv(glGetUniformLocation(lightingPipeline.shaderProgram, "projection"), 1, GL_TRUE, projection)
 
         car.update(controller.r, controller.theta)
+        box.update()
+        sun.update()
         sg.drawSceneGraphNode(car.node,lightingPipeline,"model")
         sg.drawSceneGraphNode(track.node,lightingPipeline,"model")
         sg.drawSceneGraphNode(sky.node,lightingPipeline,"model")
+        sg.drawSceneGraphNode(box.node,lightingPipeline,"model")
+        sg.drawSceneGraphNode(sun.node,lightingPipeline,"model")
 
 
         # Once the drawing is rendered, buffers are swap so an uncomplete drawing is never seen.

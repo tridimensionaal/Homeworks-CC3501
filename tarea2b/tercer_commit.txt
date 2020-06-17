@@ -1,9 +1,0 @@
-En esta tercera versión, se realizaron los siguientes avances del juego:
-
-1- Se agregó espesor a la pista (para que ésta no fuese un simple plano). Además, se le dieron distintas alturas a la pista (es decir, la pista en ciertos tramos sube y en ciertos tramos baja).
-
-2- Se ideó un sistema para el auto baje o suba dependiendo de la altura de la pista (el sistema todavía presenta fallas y debe ser pulido).
-
-3- Se agregó una skybox para darle un escenario a la pista.
-
-

@@ -25,7 +25,7 @@ class PolarCamera:
     def updateEye(self,alpha):
         self.eyeX = -75*np.cos(alpha)+ self.atX
         self.eyeY = self.atY  - 75*np.sin(alpha)
-        self.eyeZ = self.atZ + 10
+        self.eyeZ = self.atZ + 20
 
     def update_view(self):
         self.viewPos = np.array([self.eyeX, self.eyeY, self.eyeZ])
@@ -33,7 +33,7 @@ class PolarCamera:
         self.view = tr.lookAt(
             self.viewPos,
             np.array([self.atX,self.atY,1]),
-            np.array([0,0,1])
+            np.array([0,0,3])
         )   
         
         return self.view

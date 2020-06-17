@@ -1,0 +1,10 @@
+En esta tercera versión, se realizaron los siguientes avances del juego:
+
+1- Se pulió el sistema para que el auto baje o suba dependiendo de la altura de la pista. 
+
+2- Se modificaron y agregaron elementos al diseño del auto
+
+3- Se agreagaron elementos de decoración para la escena
+
+
+
