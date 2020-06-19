@@ -1,4 +1,3 @@
-# coding=utf-8
 
 import glfw
 from OpenGL.GL import *
@@ -81,7 +80,7 @@ if __name__ == "__main__":
         key2(window)
 
         # Setting up the projection transform
-        projection = tr.perspective(60, float(width)/float(height), 0.1, 2000)
+        projection = tr.perspective(60, float(width)/float(height), 0.1, 2500)
 
         controller.camera().updateAt(car.x,car.y,car.z)
         controller.camera().updateEye(car.theta)

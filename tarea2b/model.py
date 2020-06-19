@@ -6,6 +6,7 @@ from libs import transformations as tr
 from libs import easy_shaders as es
 from libs import scene_graph as sg
 from libs import local_shapes as ls
+from libs import nonuniform_splines as no
 
 class Skybox:
     def __init__(self):
@@ -16,7 +17,6 @@ class Skybox:
         sky.transform = tr.uniformScale(2000)
 
         self.node = sky
-
 
 class Track:
     def __init__(self):
@@ -33,39 +33,27 @@ class Track:
         p9 = np.array([0,-7,0])
         p10 = np.array([3,-3,0.3])
         p11 = np.array([5,-6,0.3])
-        nodes1 = np.array([p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11])
 
-        #Puntos que defines el borde interior de la pista
-        p0 = np.array([7,0,0.3])
-        p1 = np.array([5,4,0])
-        p2 = np.array([3,1,0])
-        p3 = np.array([0,5,0])
-        p4 = np.array([-3,1,0.3])
-        p5 = np.array([-5,4,0.3])
-        p6 = np.array([-7,0,0.3])
-        p7 = np.array([-5,-4,0])
-        p8 = np.array([-3,-1,0])
-        p9 = np.array([0,-5,0])
-        p10 = np.array([3,-1,0.3])
-        p11 = np.array([5,-4,0.3])
-        nodes2 = np.array([p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11])
+        points = np.array([p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11])
 
-        points1, points2, shapeTrack = ls.generateNormalTrack(nodes1,nodes2,60,"images/blue.png")
+        pointstrack = no.Track(points,300,100)
+
+        shapeTrack = ls.generateNormalTrack(pointstrack,"images/blue.png")
 
         gpuTrack = es.toGPUShape(shapeTrack, GL_REPEAT, GL_LINEAR)
         track = sg.SceneGraphNode("track")
         track.childs = [gpuTrack]
 
         self.node = track
-        self.points1 = points1 
-        self.points2 = points2
+        self.points1 = pointstrack.ext
+        self.points2 = pointstrack.int
 
 class Sun:
     def __init__(self):
         gpuSphere= es.toGPUShape(ls.generateNormalSphere(30,30,"images/sun.png"), GL_REPEAT, GL_LINEAR)
 
         sphere = sg.SceneGraphNode("sphere")
-        sphere.transform = tr.uniformScale(150)
+        sphere.transform = tr.uniformScale(300)
         sphere.childs = [gpuSphere]
 
         rotatesphere = sg.SceneGraphNode("rotatesphere")
@@ -82,7 +70,6 @@ class Sun:
             self.theta = 0
 
         self.node.transform = tr.rotationZ(self.theta)
-
 
 class Boxes:
     def __init__(self,car):
@@ -208,8 +195,8 @@ class Car:
                 self.r = 0
         else:
             self.r += self.dr
-            if self.r > 2.2:
-                self.r = 2.2
+            if self.r > 3.3:
+                self.r = 3.3
 
     def updateTheta(self, theta):
         if theta == -1:
@@ -228,14 +215,12 @@ class Car:
                     self.z = 3.1
             else:
                 self.z += self.r*self.dzu
-                if self.z > 21.5:
-                    self.z = 21.5
+                if self.z > 33.5:
+                    self.z = 33.5
         else:
             return
  
  
-
-
     def updateWheels(self):
         self.phi -= 0.75*self.r
         leftwheel = sg.findNode(self.node,"leftwheel")

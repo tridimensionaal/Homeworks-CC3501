@@ -339,69 +339,42 @@ def generateNormalSphere(nTheta, nPhi, file_name):
 
     return bs.Shape(vertices, indices, file_name)
 
-def generateNormalTrack(l1, l2, n, file_name):
-    l1 *= n
-    l2 *= n
-
-    nodes = np.ndarray((12),dtype=no.Node)
-
-    for i in range(len(l1)):
-        point = l1[i]
-        node = no.Node(point)
-        nodes[i] = node
-    nodes1 = no.Nodes(nodes)
-
-    nodes = np.ndarray((12),dtype=no.Node)
-    for i in range(len(l2)):
-        point = l2[i]
-        node = no.Node(point)
-        nodes[i] = node
-
-    nodes2 = no.Nodes(nodes)
-
-    points1 =[]
-    for node in nodes1.nodes:
-        for point in node.list:
-            points1 += [point]
-
-    points2 = []
-    for node in nodes2.nodes:
-        for point in node.list:
-            points2 += [point]
+def generateNormalTrack(trackpoints, file_name):
 
     vertices = []
     indices = []
-
     start_index = 0
 
-    large = len(points1)
+    pointsext = trackpoints.ext
+    pointsint = trackpoints.int
+
+    large = len(pointsext)
 
     for i in range(large):
-        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,points1[i], points1[(i+1)%large],points2[(i+1)%large],points2[i])
+        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,pointsext[i], pointsext[(i+1)%large],pointsint[(i+1)%large],pointsint[i])
 
         vertices += _vertex
         indices += _indices
         start_index += 4
 
     for i in range(large):
-        p1 = [points1[i][0], points1[i][1], points1[i][2] - 10]
-        p2 = [points1[(i+1)%large][0], points1[(i+1)%large][1], points1[(i+1)%large][2] - 10]
+        p1 = pointsext[i] + np.array([0,0,-10])
+        p2 = pointsext[(i+1)%large] + np.array([0,0,-10])
 
-        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,points1[i], points1[(i+1)%large],p2,p1)
+        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,pointsext[i], pointsext[(i+1)%large],p2,p1)
+
         vertices += _vertex
         indices  += _indices
         start_index += 4
 
     for i in range(large):
-        p1 = [points2[i][0], points2[i][1], points2[i][2] - 10]
-        p2 = [points2[(i+1)%large][0], points2[(i+1)%large][1], points2[(i+1)%large][2] - 10]
+        p1 = pointsint[i] + np.array([0,0,-10])
+        p2 = pointsint[(i+1)%large] + np.array([0,0,-10])
 
-        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,points2[i], points2[(i+1)%large],p2,p1)
+        _vertex, _indices = createTextureNormalsQuadIndexation(start_index,pointsint[i], pointsint[(i+1)%large],p2,p1)
         vertices += _vertex
         indices  += _indices
         start_index += 4
 
- 
-
-    return points1, points2, bs.Shape(vertices,indices,file_name)
+    return bs.Shape(vertices,indices,file_name)
 
