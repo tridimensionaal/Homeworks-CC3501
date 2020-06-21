@@ -1,4 +1,0 @@
-En esta quinta versión, se realizaron los siguientes avances del juego:
-
-1- Se generó la pista a través de una nonuniform spline
-

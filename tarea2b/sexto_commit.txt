@@ -1,0 +1,5 @@
+En esta quinta versión, se realizaron los siguientes avances del juego:
+
+1- Se resolvieron detalles respecto al model del auto, la decoración y la pista.
+
+

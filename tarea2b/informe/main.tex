@@ -1,0 +1,125 @@
+% Template:     Informe LaTeX
+% Documento:    Archivo principal
+% Versión:      6.8.3 (22/04/2020)
+% Codificación: UTF-8
+%
+% Autor: Pablo Pizarro R.
+%        Facultad de Ciencias Físicas y Matemáticas
+%        Universidad de Chile
+%        pablo@ppizarror.com
+%
+% Manual template: [https://latex.ppizarror.com/informe]
+% Licencia MIT:    [https://opensource.org/licenses/MIT]
+
+% CREACIÓN DEL DOCUMENTO
+\documentclass[letterpaper,11pt,oneside]{article}
+
+% INFORMACIÓN DEL DOCUMENTO
+\def\titulodelinforme {Informe Tarea N°2}
+\def\temaatratar {OpenGL 3D}
+\def\autordeldocumento {Matías Seda}
+\def\nombredelcurso {Modelación y computación Gráfica para Ingenieros}
+\def\codigodelcurso {CC3501-1}
+
+\def\nombreuniversidad {Universidad de Chile}
+\def\nombrefacultad {Facultad de Ciencias Físicas y Matemáticas}
+\def\departamentouniversidad {Departamento de Ciencias de la Computación}
+\def\imagendepartamento {departamentos/fcfm}
+\def\imagendepartamentoescala {0.2}
+\def\localizacionuniversidad {Santiago, Chile}
+
+% INTEGRANTES, PROFESORES Y FECHAS
+\def\tablaintegrantes {
+\begin{tabular}{ll}
+	Integrantes:
+	& \begin{tabular}[t]{l}
+		Matías Seda 
+	\end{tabular} \\
+	Profesor:
+	& \begin{tabular}[t]{l}
+        Daniel Calderón
+	\end{tabular} \\
+	Auxiliar:
+	& \begin{tabular}[t]{l}
+        Alonso Utreras \\
+        Nelson Marambio
+	\end{tabular} \\
+	Ayudantes:
+	& \begin{tabular}[t]{l}
+        Beatriz Grabaloza \\
+        Heinich Porro Sufan \\
+        Nadia Decar \\
+        Tomas Calderón
+	\end{tabular} \\
+	\multicolumn{2}{l}{Fecha de entrega: \today} \\
+	\multicolumn{2}{l}{\localizacionuniversidad}
+\end{tabular}
+}
+
+% CONFIGURACIONES
+\input{lib/config}
+
+% IMPORTACIÓN DE LIBRERÍAS
+\input{lib/env/imports}
+
+% IMPORTACIÓN DE FUNCIONES Y ENTORNOS
+\input{lib/cmd/all}
+
+% IMPORTACIÓN DE ESTILOS
+\input{lib/style/all}
+
+% CONFIGURACIÓN INICIAL DEL DOCUMENTO
+\input{lib/cfg/init}
+
+% INICIO DE LAS PÁGINAS
+\begin{document}
+	
+% PORTADA
+\input{lib/page/portrait} % Se puede borrar
+
+% CONFIGURACIÓN DE PÁGINA Y ENCABEZADOS
+\input{lib/cfg/page}
+
+% CONFIGURACIONES FINALES
+\input{lib/cfg/final}
+
+% ======================= INICIO DEL DOCUMENTO =======================
+\begin{enumerate}
+    \item \textbf{\underline{Solución propuesta:}} 
+
+        El programa implementa el patrón de diseño \textit{Modelo-Vista-Controlador} para generar un juego de autos de carreras. A grandes rasgos, la lógica del programa es la siguiente;
+        \insertimage[]{img/2.png}{width=10cm}{Lógica del programa.}
+
+        Respecto al modelo, la pista fue generada a través de una figura geométrica basada en una\textit{rounded nonuniform spline} y texturas, el auto de carrera fue generado a través de un conjunto de figuras geométricas y texturas y la decoración de la escena fue generada a través de un conjunto de figuras geométricas y texturas.\\
+
+        Para visualizar la escena, se utilizó una vista 3D modelada a través de una cámara en cóodenadas cilíndricas y para controlar los movimentos del auto de carreras, se utilizó una aplicación de controlador.
+
+    \item \textbf{\underline{Instrucciones de ejecución:}} 
+
+        Via terminal, se debe dirigir a la carpeta \textit{tarea2b} que contiene el programa y ejecutar via terminal el archivo \textit{tarea2b.py}. En la siguiente foto se ejemplifica lo dicho: 
+        \insertimage[]{img/2.png}{width=15cm}{Ejecuntado el programa vía terminal.}
+
+
+        Ahora, cuando se ha ejecutado el programa, para mover el auto se utilizan las teclas \textit{Arrow-up}, \textit{Arrow-left} y \textit{Arrow-right}. La tecla \textit{Arrow-up} es para mover el auto de carreras hacia adelante, la tecla \textit{Arrow-left} es para rotar el auto de carreras hacia la izquierda y la tecla \textit{Arrow-right} es para rotar el auto hacia la derecha. Apretando la tecla \textit{ESC} se cierra el programa.
+    \item \textbf{\underline{Resultados:}} 
+
+        El auto comienza en la posición inicial de la pista. La posición inicial de la pista viene marcada por dos cajas. En la siguiente imagen se muestra la situación inicial del juego.
+        \insertimage[]{img/3.png}{width=10cm}{Situación inicial del juego.}
+
+
+        Al mantener apretada la tecla \textit{Arrow-up}, al auto avanza hacia adelante.
+        \insertimage[]{img/4.png}{width=10cm}{El auto avanza hacia adelante.}  
+
+        Cuando hay una curva en la pista, para mantener el auto en movimiento en la pista, se mantiene apretada la tecla \textit{Arrow-up} para avanzar hacia adelante y, al mismo tiempo, se mantiene apretada la tecla \textit{Arrow-left} o \textit{Arrow-right} para girar el auto. De esa forma, el auto avanza hacia adelante mientras rota, es decir, el auto se mueve curvilíneamte. 
+        \insertimage[]{img/5.png}{width=10cm}{El auto avanzando en la curva}
+
+        El auto de carreras, cuando se encuentra nuevamente con las cajas iniciales, significa que dió una vuelta completa.
+        \insertimage[]{img/6.png}{width=10cm}{El auto completando una vuelta.}
+
+        Para terminar el juego, se debe apretar la tecla \textit{ESC}.
+
+\end{enumerate}
+
+
+% FIN DEL DOCUMENTO
+\end{document}

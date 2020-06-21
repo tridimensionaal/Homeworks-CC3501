@@ -1,19 +1,22 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#Función que retorna un vector tiempo
 def generateT(t):
     return np.array([t**3,t**2,t,1])
 
+#Función que retorna un vector de la derivada del tiempo
 def generateDT(t):
     return np.array([3*t**2,2*t,1,0])
 
 
+#Función que dado que dos puntos p1,p2 y dos tangentes t1, t2, retorna el producto matricial entre la matriz geometría (G) y la matriz de hermite (Mh).
 def hermiteMatrix(P1, P2, T1, T2):
     G = np.array([P1,P2,T1,T2])
     Mh = np.array([[2,-2,1,1], [-3,3,-2,-1], [0,0,1,0], [1,0,0,0]])    
     return np.matmul(Mh,G)
 
-#dado dos puntos (p1 y p2) y sus velocidades (t1 y t2), se calcula un punto intermedio entre p1 y p2 dado un tiempo t e [0,1]
+#Función que dado dos puntos (p1 y p2) y sus velocidades (t1 y t2), se calcula un punto intermedio entre p1 y p2 dado un tiempo t e [0,1]
 def getPositionCubic(p1,t1,p2,t2,t):
     ts = generateT(t)
     H = hermiteMatrix(p1,p2,t1,t2)
@@ -33,6 +36,7 @@ class Node:
         self.velocity = 0
         self.distance = 0
         self.totalDistance = 0
+
 #Clase que, dado un conjunto de puntos (nodo), se crea una nonuniform spline dado el conjunto.
 class Nodes:
     def __init__(self,nodes,steps):
@@ -92,9 +96,12 @@ class Nodes:
             tan = tan/np.linalg.norm(tan)
             tans += [tan]
 
+        #Se almacena los puntos de la nonuniform spline
         self.points = np.array(points)
+        #Se almacena las velocidades de los puntos de la nonuniform spline
         self.tans = np.array(tans)
 
+#Función que dada un conjunto de puntos, una cantidad de puntos y un valor constante, retorna una pista generada a través de una nonuniform spline
 class Track:
     def __init__(self,points,steps,n):
         points *= n

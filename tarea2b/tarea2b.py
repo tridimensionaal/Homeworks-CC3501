@@ -1,4 +1,3 @@
-
 import glfw
 from OpenGL.GL import *
 import OpenGL.GL.shaders
@@ -24,7 +23,6 @@ height = 600
 def windowConf():    
     #Setups para la ventana 
 
-    # Initialize glfw
     if not glfw.init():
         sys.exit()
 
@@ -38,13 +36,13 @@ def windowConf():
 
     glfw.make_context_current(window)
 
-    # Connecting the callback function 'on_key' to handle keyboard events
+    #Se conecta la ventana con la función on_key
     glfw.set_key_callback(window, on_key)
 
-    # Setting up the clear screen color
+    #Color de fondo de la ventana
     glClearColor(0.7, 0.7, 0.7, 1.0)
 
-    # Enabling transparencies
+    #Se activan las transparencia
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
@@ -57,75 +55,64 @@ if __name__ == "__main__":
 
     window = windowConf()
 
-    # Assembling the shader program
+    #Se inicializa el shader program
     lightingPipeline = light_s.SimpleTextureGouraudShaderProgram()
 
-    # As we work in 3D, we need to check which part is in front,
-    # and which one is at the back
-
-    # Creating shapes on GPU memory
-    track = model.Track()
-    car = model.Car(track)
-    sky = model.Skybox()
-    box = model.Boxes(car)
-    sun = model.Sun()
-
-    xl = car.x
-    yl = car.y
-    zl = car.z
+    #Se crean las shapes 
+    scene = model.Scene()
 
     while not glfw.window_should_close(window):
-        # Using GLFW to check for input events
+        #Se utiliza GLFW y la función key para checkear inputs del teclado
         glfw.poll_events()
         key2(window)
 
-        # Setting up the projection transform
+        # Se inicializa la projección a usar
         projection = tr.perspective(60, float(width)/float(height), 0.1, 2500)
 
-        controller.camera().updateAt(car.x,car.y,car.z)
-        controller.camera().updateEye(car.theta)
+        #Posiciones del auto
+        x = scene.car.x
+        y = scene.car.y
+        z = scene.car.z
+
+        #ángulo de rotación del auto respecto a si mismo
+        theta = scene.car.theta
+        
+        #Se actualiza la vista
+        controller.camera().updateAt(x,y,z)
+        controller.camera().updateEye(theta)
         view = controller.camera().update_view()
         viewPos = controller.camera().view_pos()
 
-        # Clearing the screen in both, color and depth
+        #Se limpia la pantalla
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
+        #Se especifica que shader usar
         glUseProgram(lightingPipeline.shaderProgram)
 
-        # White light in all components: ambient, diffuse and specular.
+        #Componentes de la luz: ambiente, difuso y especular
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "La"), 0.7, 0.7, 0.7)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ld"), 1.0, 1.0, 1.0)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ls"), 1.0, 1.0, 1.0)
-
+        
+        #Propiedas de los objetos respecto a la luz
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ka"), 1.0, 1.0, 1.0)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Kd"), 1.0, 1.0, 1.0)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ks"), 1.0, 1.0, 1.0)
 
-
-        # TO DO: Explore different parameter combinations to understand their effect!
-
-        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "lightPosition"), car.x, car.y, car.z + 8)
+        #Se configura la luz
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "lightPosition"), x,y,z+8)
         glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "viewPosition"), viewPos[0], viewPos[1], viewPos[2])
-        glUniform1ui(glGetUniformLocation(lightingPipeline.shaderProgram, "shininess"), 100)
-
+        glUniform1ui(glGetUniformLocation(lightingPipeline.shaderProgram, "shininess"), 1000)
         glUniform1f(glGetUniformLocation(lightingPipeline.shaderProgram, "constantAttenuation"), 0.0001)
         glUniform1f(glGetUniformLocation(lightingPipeline.shaderProgram, "linearAttenuation"), 0.09)
         glUniform1f(glGetUniformLocation(lightingPipeline.shaderProgram, "quadraticAttenuation"), 0.09)
 
         glUniformMatrix4fv(glGetUniformLocation(lightingPipeline.shaderProgram, "view"), 1, GL_TRUE, view)
         glUniformMatrix4fv(glGetUniformLocation(lightingPipeline.shaderProgram, "projection"), 1, GL_TRUE, projection)
+        scene.update(controller.r,controller.theta)
 
-        car.update(controller.r, controller.theta)
-        box.update()
-        sun.update()
-        sg.drawSceneGraphNode(car.node,lightingPipeline,"model")
-        sg.drawSceneGraphNode(track.node,lightingPipeline,"model")
-        sg.drawSceneGraphNode(sky.node,lightingPipeline,"model")
-        sg.drawSceneGraphNode(box.node,lightingPipeline,"model")
-        sg.drawSceneGraphNode(sun.node,lightingPipeline,"model")
+        sg.drawSceneGraphNode(scene.node,lightingPipeline,"model")
 
-
-        # Once the drawing is rendered, buffers are swap so an uncomplete drawing is never seen.
         glfw.swap_buffers(window)
 
     glfw.terminate()

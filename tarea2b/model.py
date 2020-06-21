@@ -8,6 +8,7 @@ from libs import scene_graph as sg
 from libs import local_shapes as ls
 from libs import nonuniform_splines as no
 
+#Clase que se encaga de cargar la textura del skybox, generar el skybox y guardar la información de éste. 
 class Skybox:
     def __init__(self):
         gpuSky = es.toGPUShape(bs.createTextureNormalsCube("images/sky.jpg"),GL_REPEAT, GL_LINEAR)
@@ -18,9 +19,10 @@ class Skybox:
 
         self.node = sky
 
+#Clase que se encaga de cargar la textura de la pista, crear los puntos iniciales de la pista, generar la pista dado los puntos iniciales y guardar la información de ésta
 class Track:
     def __init__(self):
-        #Puntos que defines el borde exterior de la pista
+        #Puntos que iniciales que definen la curva 
         p0 = np.array([8,0,0.3])
         p1 = np.array([5,6,0])
         p2 = np.array([3,3,0])
@@ -36,8 +38,10 @@ class Track:
 
         points = np.array([p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11])
 
+        #Se genera la clase que, dado los puntos iniciales, crea una nonuniform spline y almacena la información sobre la geometría de la pista.
         pointstrack = no.Track(points,300,100)
 
+        #Dado la clase que almacena la información sobre la geometría de la pista, se crea el shape de la pista
         shapeTrack = ls.generateNormalTrack(pointstrack,"images/blue.png")
 
         gpuTrack = es.toGPUShape(shapeTrack, GL_REPEAT, GL_LINEAR)
@@ -45,9 +49,12 @@ class Track:
         track.childs = [gpuTrack]
 
         self.node = track
+        #Puntos del borde exterior de la pista
         self.points1 = pointstrack.ext
+        #Puntos del borde interior de la pista
         self.points2 = pointstrack.int
 
+#Clase que se encaga de cargar la textura del sol, generar el sol y guardar la información de éste.
 class Sun:
     def __init__(self):
         gpuSphere= es.toGPUShape(ls.generateNormalSphere(30,30,"images/sun.png"), GL_REPEAT, GL_LINEAR)
@@ -63,6 +70,7 @@ class Sun:
         self.theta = 0
         self.dtheta = 0.001
 
+    #Función que genera la rotación del solo sobre sí mismo.
     def update(self):
         self.theta += self.dtheta
 
@@ -71,7 +79,9 @@ class Sun:
 
         self.node.transform = tr.rotationZ(self.theta)
 
+#Clase que se encaga de cargar la textura de las cajas que marcan el inicio de la pista, generar las cajas y guardar la información de éstas.
 class Boxes:
+    #Se inicializa las cajas dado el auto, ya que se quiere que las cajas estén al inicio (donde el auto se encuentra inicialmente)
     def __init__(self,car):
         gpuBox  = es.toGPUShape(bs.createTextureNormalsCube("images/jalape.png"),GL_REPEAT, GL_LINEAR)
 
@@ -99,6 +109,7 @@ class Boxes:
         self.theta = 0
         self.dtheta = np.pi/200
 
+    #Función que genera la rotación de las cajas sobre sí mismas.
     def update(self):
         self.theta += self.dtheta
         if self.theta > 2*np.pi:
@@ -111,17 +122,19 @@ class Boxes:
         box2.transform = tr.matmul([tr.translate(self.x-50,self.y+60,self.z),tr.rotationZ(-self.theta)])
         self.node.childs = [box1,box2]
 
+#Clase que se encaga de cargar las texturas del auto, generar el auto, guardar la información de éste y proveer la lógica para que este se mueva.
 class Car:
+    #Se inicializa el auto dada la pista, ya que se quiere que el auto parta al inicio de la pista 
     def __init__(self,track):
         
-        gpuSphere= es.toGPUShape(ls.generateNormalSphere(30,30,"images/pink1.jpg"), GL_REPEAT, GL_LINEAR)
+        gpuSphere= es.toGPUShape(ls.generateNormalSphere(30,30,"images/pink1.jpeg"), GL_REPEAT, GL_LINEAR)
         gpuWheel = es.toGPUShape(ls.generateTextureNormalsCylinder(20,"images/black.jpg",2,1,0),GL_REPEAT, GL_LINEAR)
 
         gpuHead = es.toGPUShape(bs.createTextureNormalsCube("images/carita.jpg"),GL_REPEAT, GL_NEAREST)
 
         gpuSphere1 = es.toGPUShape(ls.generateNormalSphere(30,30,"images/green.png"), GL_REPEAT, GL_LINEAR)
 
-        #
+        #Se crea la cabeza del auto
         head = sg.SceneGraphNode("head")
         head.transform = tr.uniformScale(4)
         head.childs = [gpuHead]
@@ -130,7 +143,7 @@ class Car:
         translatedHead.transform = tr.translate(0,0,4)
         translatedHead.childs = [head]
 
-        #
+        #Se crea el cuerpo del auto
         sphere = sg.SceneGraphNode("sphere")
         sphere.transform = tr.uniformScale(3)
         sphere.childs = [gpuSphere]
@@ -139,7 +152,7 @@ class Car:
         sphere1.transform = tr.translate(0,0,8)
         sphere1.childs = [gpuSphere1]
 
-        #
+        #Se crea las ruedas del auto
         leftwheel = sg.SceneGraphNode("leftwheel")
         leftwheel.childs = [gpuWheel]
 
@@ -173,31 +186,34 @@ class Car:
         group.childs = [group1,group2]
 
         self.node = group
+        #Posición inicial del auto
         self.x = (track.points1[0][0]+ track.points2[0][0])/2
         self.y = (track.points1[0][1]+ track.points2[0][1])/2
         self.z = (track.points1[0][2]+ track.points2[0][2])/2 + 3
+        #Velocidad del auto
         self.r = 0
+        #Aceleración del auto
         self.dr = 0.05
-        self.dzu = 0.075
-        self.dzd = 0.045
+        #Aceleración respecto a z
+        self.dzu = 0.065
+        self.dzd =  self.dzu/2
         self.theta = np.pi/2
+        #Velocidad de rotación del auto
         self.dtheta = np.pi/100
         self.phi = 0
 
+    #Función que, dado un r, actualiza la velocidad 
     def updateR(self,r):
-        if r == -1:
-            self.r -= self.dr
-            if self.r < -0.75:
-                self.r = -0.75
-        elif r == 0:
+        if r == 0:
             self.r -= self.dr
             if self.r < 0:
                 self.r = 0
         else:
             self.r += self.dr
-            if self.r > 3.3:
-                self.r = 3.3
+            if self.r > 3:
+                self.r = 3
 
+    #Función que, dado un theta, actualiza el ángulo de rotación
     def updateTheta(self, theta):
         if theta == -1:
             self.theta -= self.dtheta
@@ -211,14 +227,15 @@ class Car:
         if self.r > 0:
             if self.x*self.y > 0:
                 self.z -= self.r*self.dzd
-                if self.z < 3.1:
-                    self.z = 3.1
+                if self.z < 3.2:
+                    self.z = 3.2
             else:
                 self.z += self.r*self.dzu
-                if self.z > 33.5:
-                    self.z = 33.5
+                if self.z > 36.5:
+                    self.z = 36.5
         else:
-            return
+            pass
+
  
  
     def updateWheels(self):
@@ -245,3 +262,30 @@ class Car:
         group1.transform = tr.rotationZ(self.theta)
         group2.transform = tr.rotationZ(self.theta)
         group.transform = tr.translate(self.x,self.y,self.z)
+
+class Scene:
+    def __init__(self):
+        track = Track()
+        car = Car(track)
+        sky = Skybox()
+        box = Boxes(car)
+        sun = Sun()
+
+        scene = sg.SceneGraphNode("scene")
+
+        self.node = scene
+        self.track = track
+        self.car = car
+        self.sky = sky
+        self.box = box
+        self.sun = sun
+
+    def update(self, r,theta):
+        self.car.update(r,theta)
+        self.box.update()
+        self.sun.update()
+
+        self.node.childs = [self.track.node, self.car.node, self.sky.node, self.box.node, self.sun.node]
+
+
+
