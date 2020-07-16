@@ -1,19 +1,32 @@
 import numpy as np
+import json
+import sys 
 from scipy.sparse import lil_matrix
-from scipy.sparse import csr_matrix 
 from scipy.sparse.linalg import spsolve
 
-#ymax
-W = 3
+name = sys.argv[1]
+name = "./" + str(name)
+
+with open(name) as f:
+    data = json.load(f)
+
+
 #zmax
-H = 4
+H = data["height"]
+#ymax
+W = data["width"]
 #xmax
-L = 6 
-h = 0.25
-B = 0.1
-Tamb = 40
-TA = 5
-TB = 5
+L = data["lenght"]
+#
+B = data["window_loss"]
+#
+TA = data["heater_a"]
+#
+TB = data["heater_b"]
+#
+Tamb = data["ambient_temperature"]
+#
+h = 0.2
 
 nW= int(W/h)
 nH = int(H/h) 
@@ -113,9 +126,10 @@ for i in range(nL):
 
 A = A.tocsr()
 x = spsolve(A,b)
+np.save(data["filename"],x)
 
+'''
 print(x)
-
 xu = []
 yu = []
 zu = []
@@ -135,4 +149,5 @@ fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.scatter(xu, yu, zu, c=cu, cmap='viridis', linewidth=0.5);
 plt.show()
+'''
 

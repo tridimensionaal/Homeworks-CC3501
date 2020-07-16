@@ -1,3 +1,0 @@
-En esta primera versión, se realizaron los siguientes avances:
-
-1- Se escribió un programa, "aquarium-solver.py" que resuelve el problema de laplace en el caso de la tarea (acuario)
