@@ -1,7 +1,0 @@
-En esta segunda versión, se realizaron los siguientes avances:
-
-1- Se creo un archivo "problem-setup.json" que almacena los valores para los distintos parámetros del problema.
-
-2- Se modificó el programa "aquarium-solver.py" para que leyera el archvio "problem-setup.json" y utilizar los valores del archivo.
-
-3- Se modificó el programa "aquarium-solver.py" para que almacenara en un archivo "solution.npy" los resultados de las temperaturas en los distintos puntos del espacio. 

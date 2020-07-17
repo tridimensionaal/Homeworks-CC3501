@@ -26,7 +26,7 @@ TB = data["heater_b"]
 #
 Tamb = data["ambient_temperature"]
 #
-h = 0.2
+h = 0.1
 
 nW= int(W/h)
 nH = int(H/h) 
@@ -126,9 +126,16 @@ for i in range(nL):
 
 A = A.tocsr()
 x = spsolve(A,b)
-np.save(data["filename"],x)
+aquarium = np.zeros((nL,nW,nH))
+for p in range(0,N):
+    i,j,k = getIJK(p)
+    aquarium[i][j][k] = x[p]
+
+np.save(data["filename"],aquarium)
 
 '''
+
+
 print(x)
 xu = []
 yu = []

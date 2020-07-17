@@ -1,0 +1,12 @@
+En esta tercera versión, se realizaron los siguientes avances:
+
+1- Se creo un archvio "view-setup.json" que almacena algunos parámetos para la visualización del acuario y los peces.
+
+2- Se ordenaron los archivos y liberías para poder realizar una primera y básica visualizacón del acuario y 1 pez.
+
+3- Se programó un parte del código que lee la información en el archivo  "view-setup.json" 
+
+4- Se creó un modelo básico para el acuario y un pez.
+
+5- Con lo mencionado anteriormente, se generó una visualización básica y primaria.
+
