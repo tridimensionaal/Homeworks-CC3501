@@ -1,0 +1,8 @@
+En esta cuarta versión, se realizaron los siguientes avances:
+
+1- Se modificó el modelo para poder visualizar la cantidad total de peces por cada tipo de pez
+
+2- Sumado a lo anterior, se colocó a cada tipo de pez en su lugar respectivo (es decir, dadas las temperaturas de los peces en el acuario, se colocaron los peces) y se pintó cada tipo de pez de un color particular.
+
+3- Se crearon los voxeles (pero no se agregó la opción para visualizarlos).
+

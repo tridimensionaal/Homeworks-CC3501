@@ -72,14 +72,12 @@ if __name__ == "__main__":
 
     #Se crean las shapes 
     scene = model.Scene(data,aquarium)
-    aquarium = scene.aquarium
-    x = aquarium.x
-    y = aquarium.y
-    z = aquarium.z
-    fish = scene.fish
+    x = scene.aquarium.x
+    y = scene.aquarium.y
+    z = scene.aquarium.z
 
     controller.camera().updateAt(x/2,y/2, z/2)
-    controller.set_r(aquarium.x,aquarium.y)
+    controller.set_r(x,y)
 
     while not glfw.window_should_close(window):
         #Se utiliza GLFW y la función key para checkear inputs del teclado
@@ -88,6 +86,8 @@ if __name__ == "__main__":
 
         # Se inicializa la projección a usar
         projection = tr.perspective(60, float(width)/float(height), 0.1, 2500)
+
+        scene.update(0,0,0)
 
         #Se actualiza la vista
         controller.camera().updateEye(controller.r,controller.theta)
@@ -122,9 +122,7 @@ if __name__ == "__main__":
         glUniformMatrix4fv(glGetUniformLocation(lightingPipeline2.shaderProgram, "view"), 1, GL_TRUE, view)
         glUniformMatrix4fv(glGetUniformLocation(lightingPipeline2.shaderProgram, "projection"), 1, GL_TRUE, projection)
  
-        sg.drawSceneGraphNode(fish.node,lightingPipeline2,"model")
-
-
+        sg.drawSceneGraphNode(scene.fishes.node,lightingPipeline2,"model")
 
         #Se especifica que shader usar
         glUseProgram(lightingPipeline.shaderProgram)
@@ -149,7 +147,7 @@ if __name__ == "__main__":
 
         glUniformMatrix4fv(glGetUniformLocation(lightingPipeline.shaderProgram, "view"), 1, GL_TRUE, view)
         glUniformMatrix4fv(glGetUniformLocation(lightingPipeline.shaderProgram, "projection"), 1, GL_TRUE, projection)
-        sg.drawSceneGraphNode(aquarium.node,lightingPipeline,"model")
+        sg.drawSceneGraphNode(scene.aquarium.node,lightingPipeline,"model")
 
         glfw.swap_buffers(window)
 
