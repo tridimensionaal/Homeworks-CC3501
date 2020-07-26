@@ -26,14 +26,13 @@ TB = data["heater_b"]
 #
 Tamb = data["ambient_temperature"]
 #
-h = 0.25
+h = 0.35
 
 nW= int(W/h)
 nH = int(H/h) 
 nL = int(L/h)
 
 N = nH*nW*nL
-print(N)
 
 def getP(i,j,k):
     return k*(nW*nL) + j*nL +  i
@@ -132,7 +131,7 @@ for p in range(0,N):
     aquarium[i][j][k] = x[p]
 
 np.save(data["filename"],aquarium)
-
+'''
 xu = []
 yu = []
 zu = []
@@ -152,4 +151,4 @@ fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.scatter(xu, yu, zu, c=cu, cmap='viridis', linewidth=0.5);
 plt.show()
-
+'''

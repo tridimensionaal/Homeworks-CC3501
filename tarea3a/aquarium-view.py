@@ -69,6 +69,7 @@ if __name__ == "__main__":
     #Se inicializa el shader program
     lightingPipeline = light_s.SimpleTextureGouraudShaderProgram(0.1)
     lightingPipeline2 = light_s.SimpleTextureGouraudShaderProgram(1)
+    lightingPipeline3 = light_s.SimpleTextureGouraudShaderProgram(0.2)
 
     #Se crean las shapes 
     scene = model.Scene(data,aquarium)
@@ -87,7 +88,7 @@ if __name__ == "__main__":
         # Se inicializa la projección a usar
         projection = tr.perspective(60, float(width)/float(height), 0.1, 2500)
 
-        scene.update(0,0,0)
+        scene.update(0,0,1)
 
         #Se actualiza la vista
         controller.camera().updateEye(controller.r,controller.theta)
@@ -123,6 +124,32 @@ if __name__ == "__main__":
         glUniformMatrix4fv(glGetUniformLocation(lightingPipeline2.shaderProgram, "projection"), 1, GL_TRUE, projection)
  
         sg.drawSceneGraphNode(scene.fishes.node,lightingPipeline2,"model")
+
+        #Se especifica que shader usar
+        glUseProgram(lightingPipeline3.shaderProgram)
+
+        #Componentes de la luz: ambiente, difuso y especular
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "La"), 0.7, 0.7, 0.7)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ld"), 1.0, 1.0, 1.0)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ls"), 1.0, 1.0, 1.0)
+        
+        #Propiedas de los objetos respecto a la luz
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ka"), 1.0, 1.0, 1.0)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Kd"), 1.0, 1.0, 1.0)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "Ks"), 1.0, 1.0, 1.0)
+
+        #Se configura la luz
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "lightPosition"), x/2 ,y/2,z/2)
+        glUniform3f(glGetUniformLocation(lightingPipeline.shaderProgram, "viewPosition"), viewPos[0], viewPos[1], viewPos[2])
+        glUniform1ui(glGetUniformLocation(lightingPipeline.shaderProgram, "shininess"), 1000)
+        glUniform1f(glGetUniformLocation(lightingPipeline.shaderProgram, "constantAttenuation"), 0.0001)
+        glUniform1f(glGetUniformLocation(lightingPipeline.shaderProgram, "linearAttenuation"), 0.09)
+        glUniform1f(glGetUniformLocation(lightingPipeline.shaderProgram, "quadraticAttenuation"), 0.09)
+
+        glUniformMatrix4fv(glGetUniformLocation(lightingPipeline.shaderProgram, "view"), 1, GL_TRUE, view)
+        glUniformMatrix4fv(glGetUniformLocation(lightingPipeline.shaderProgram, "projection"), 1, GL_TRUE, projection)
+        sg.drawSceneGraphNode(scene.voxeles.node,lightingPipeline,"model")
+
 
         #Se especifica que shader usar
         glUseProgram(lightingPipeline.shaderProgram)

@@ -34,17 +34,13 @@ class Aquarium:
 
 class Voxeles:
     def __init__(self,aquarium,ta,tb,tc):
-        gpuVoxelTa =  es.toGPUShape(bs.createTextureNormalsCube("images/water.jpg"),GL_REPEAT, GL_LINEAR)
-        gpuVoxelTb=  es.toGPUShape(bs.createTextureNormalsCube("images/water.jpg"),GL_REPEAT, GL_LINEAR)
-        gpuVoxelTc =  es.toGPUShape(bs.createTextureNormalsCube("images/water.jpg"),GL_REPEAT, GL_LINEAR)
-
         x = aquarium.x
         y = aquarium.y
         z = aquarium.z
 
-        voxelesTa = []
-        voxelesTb = []
-        voxelesTc = []
+        voxelTa = bs.Shape([],[], "./images/pink1.jpeg")
+        voxelTb = bs.Shape([],[], "./images/green.png")
+        voxelTc = bs.Shape([],[], "./images/black.jpg")
 
         voxelesTaPos= []
         voxelesTbPos= []
@@ -54,48 +50,36 @@ class Voxeles:
             for j in range(y):
                 for k in range(z):
                     if ta-2 <= aquarium.temp[i][j][k] <= ta+2:
-                        #Se crea un voxel
-                        voxelTa = sg.SceneGraphNode("voxelTa")
-                        voxelTa.childs = [gpuVoxelTa]
-                        voxelTa.transform = tr.translate(i,j,k)
-
-                        voxelesTa += [voxelTa]
-                        voxelesTaPos+= [[i,j,k]]
+                        temp_shape = bs.createTextureNormalsCube2(i,j,k,"./images/pink1.jpeg")
+                        bs.merge(destinationShape=voxelTa, strideSize=6, sourceShape=temp_shape)
+                        voxelesTaPos += [[i,j,k]]
 
                     if tb-2 <= aquarium.temp[i][j][k] <= tb+2:
-                        voxelTb= sg.SceneGraphNode("voxelTb")
-                        voxelTb.childs = [gpuVoxelTb]
-                        voxelTb.transform = tr.translate(i,j,k)
-
-                        voxelesTb += [voxelTb]
-                        voxelesTbPos+= [[i,j,k]]
+                        temp_shape = bs.createTextureNormalsCube2(i,j,k,"./images/green.png")
+                        bs.merge(destinationShape=voxelTb, strideSize=6, sourceShape=temp_shape)
+                        voxelesTbPos += [[i,j,k]]
 
                     if tc-2 <= aquarium.temp[i][j][k] <= tc+2:
-                        voxelTc= sg.SceneGraphNode("voxelTc")
-                        voxelTc.childs = [gpuVoxelTc]
-                        voxelTc.transform = tr.translate(i,j,k)
-
-                        voxelesTc += [voxelTc]
-                        voxelesTcPos+= [[i,j,k]]
+                        temp_shape = bs.createTextureNormalsCube2(i,j,k,"./images/black.jpg")
+                        bs.merge(destinationShape=voxelTc, strideSize=6, sourceShape=temp_shape)
+                        voxelesTcPos += [[i,j,k]]
  
         self.node = sg.SceneGraphNode("node")
-        self.voxelesTa = voxelesTa
-        self.voxelesTb = voxelesTb
-        self.voxelesTc = voxelesTc
+        self.voxelesTa = es.toGPUShape(voxelTa,GL_REPEAT, GL_LINEAR)
+        self.voxelesTb = es.toGPUShape(voxelTb,GL_REPEAT, GL_LINEAR)
+        self.voxelesTc = es.toGPUShape(voxelTc,GL_REPEAT, GL_LINEAR)
         self.voxelesTaPos = voxelesTaPos
         self.voxelesTbPos = voxelesTbPos
         self.voxelesTcPos = voxelesTcPos
 
-
-
     def update(self,a,b,c):
         self.node.childs = []
         if a==1:
-            self.node.childs += self.voxelesTa
+            self.node.childs += [self.voxelesTa]
         if b==1:
-            self.node.childs += self.voxelesTb
+            self.node.childs += [self.voxelesTb]
         if c==1:
-            self.node.childs += self.voxelesTc
+            self.node.childs += [self.voxelesTc]
 
 class Fishes:
     def __init__(self):
