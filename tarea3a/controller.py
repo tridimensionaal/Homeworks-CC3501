@@ -52,9 +52,12 @@ class Controller:
         self.polar_camera = PolarCamera()
         self.r = 5
         self.theta = 0
-        self.dr = 0.1
+        self.dr = 0.25
         self.dtheta = np.pi/200
         self.minr = 0
+        self.a = False
+        self.b = False
+        self.c = False
 
     #Función que retorna la cámara
     def camera(self):
@@ -78,6 +81,12 @@ def on_key(window, key, scancode, action, mods):
 
         if key == glfw.KEY_ESCAPE:
             glfw.set_window_should_close(window,True)
+        if key == glfw.KEY_A:
+            controller.a = not controller.a
+        if key == glfw.KEY_B:
+            controller.b = not controller.b
+        if key ==glfw.KEY_C:
+            controller.c = not controller.c
     return 
 
 #Función que dada una ventana, recibe los inputs de teclados correspondientes
@@ -97,7 +106,6 @@ def key2(window):
     else:
         pass
 
-
     if (glfw.get_key(window, glfw.KEY_UP) == glfw.PRESS):
         controller.r -= controller.dr
         if controller.r < controller.minr:
@@ -106,6 +114,4 @@ def key2(window):
         controller.r += controller.dr
     else:
         pass
-
-
 

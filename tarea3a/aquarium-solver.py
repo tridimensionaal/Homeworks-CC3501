@@ -26,7 +26,7 @@ TB = data["heater_b"]
 #
 Tamb = data["ambient_temperature"]
 #
-h = 0.35
+h = 0.2
 
 nW= int(W/h)
 nH = int(H/h) 

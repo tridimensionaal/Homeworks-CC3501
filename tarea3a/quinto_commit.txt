@@ -1,5 +1,0 @@
-En esta quinta versión, se realizaron los siguientes avances:
-
-1- Se modificó el modelo para poder visualizar los voxeles.
-
-

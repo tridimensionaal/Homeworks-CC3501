@@ -1,0 +1,133 @@
+% Template:     Informe LaTeX
+% Documento:    Archivo principal
+% Versión:      6.8.3 (22/04/2020)
+% Codificación: UTF-8
+%
+% Autor: Pablo Pizarro R.
+%        Facultad de Ciencias Físicas y Matemáticas
+%        Universidad de Chile
+%        pablo@ppizarror.com
+%
+% Manual template: [https://latex.ppizarror.com/informe]
+% Licencia MIT:    [https://opensource.org/licenses/MIT]
+
+% CREACIÓN DEL DOCUMENTO
+\documentclass[letterpaper,11pt,oneside]{article}
+
+% INFORMACIÓN DEL DOCUMENTO
+\def\titulodelinforme {Informe Tarea N°3}
+\def\temaatratar {Diferencias Finitas para EDPs y Visualización Científica}
+\def\autordeldocumento {Matías Seda}
+\def\nombredelcurso {Modelación y computación Gráfica para Ingenieros}
+\def\codigodelcurso {CC3501-1}
+
+\def\nombreuniversidad {Universidad de Chile}
+\def\nombrefacultad {Facultad de Ciencias Físicas y Matemáticas}
+\def\departamentouniversidad {Departamento de Ciencias de la Computación}
+\def\imagendepartamento {departamentos/fcfm}
+\def\imagendepartamentoescala {0.2}
+\def\localizacionuniversidad {Santiago, Chile}
+
+% INTEGRANTES, PROFESORES Y FECHAS
+\def\tablaintegrantes {
+\begin{tabular}{ll}
+	Integrantes:
+	& \begin{tabular}[t]{l}
+		Matías Seda 
+	\end{tabular} \\
+	Profesor:
+	& \begin{tabular}[t]{l}
+        Daniel Calderón
+	\end{tabular} \\
+	Auxiliar:
+	& \begin{tabular}[t]{l}
+        Alonso Utreras \\
+        Nelson Marambio
+	\end{tabular} \\
+	Ayudantes:
+	& \begin{tabular}[t]{l}
+        Beatriz Grabaloza \\
+        Heinich Porro Sufan \\
+        Nadia Decar \\
+        Tomas Calderón
+	\end{tabular} \\
+	\multicolumn{2}{l}{Fecha de entrega: \today} \\
+	\multicolumn{2}{l}{\localizacionuniversidad}
+\end{tabular}
+}
+
+% CONFIGURACIONES
+\input{lib/config}
+
+% IMPORTACIÓN DE LIBRERÍAS
+\input{lib/env/imports}
+
+% IMPORTACIÓN DE FUNCIONES Y ENTORNOS
+\input{lib/cmd/all}
+
+% IMPORTACIÓN DE ESTILOS
+\input{lib/style/all}
+
+% CONFIGURACIÓN INICIAL DEL DOCUMENTO
+\input{lib/cfg/init}
+
+% INICIO DE LAS PÁGINAS
+\begin{document}
+	
+% PORTADA
+\input{lib/page/portrait} % Se puede borrar
+
+% CONFIGURACIÓN DE PÁGINA Y ENCABEZADOS
+\input{lib/cfg/page}
+
+% CONFIGURACIONES FINALES
+\input{lib/cfg/final}
+
+% ======================= INICIO DEL DOCUMENTO =======================
+\begin{enumerate}
+    \item \textbf{\underline{Solución propuesta:}} 
+        Se tienen dos programas. El primer programa resuelve el problema de laplace para las temperaturas en el acuario y guarda la información en un archivo \textit{solution.npy} y el segundo programa carga la información del archivo \textit{solution.npy} y visualiza la información. El programa de visualización implementa el patrón de diseño \textit{Modelo-Vista-Controlador} para visualizar el acuario con los peces y voxeles. Para visualizar la escena, se utilizó una vista 3D modelada a través de una cámara en cóodenadas cilíndricas y para controlar los movimentos del auto de carreras, se utilizó una aplicación de controlador.\\
+
+        A grandes rasgos, la lógica y la interacción de estos dos programas es la siguiente:
+        \insertimage[]{img/0.png}{width=10cm}{Lógica del programa.}
+
+
+    \item \textbf{\underline{Instrucciones de ejecución:}} 
+
+        Via terminal, se debe dirigir a la carpeta \textit{tarea3a} que contiene el programa \textit{aquarium-solver.py} y ejecutarlo via terminal de la siguiente manera:
+
+        \insertimage[]{img/1.png}{width=15cm}{Ejecuntado el programa vía terminal.}
+
+        Luego, en la misma carpeta, se debe ejecutar via terminal el programa \textit{aquarium-view.py} de la siguiente manera:
+
+        \insertimage[]{img/2.png}{width=15cm}{Ejecuntado el programa vía terminal.}
+
+
+        Ahora, cuando se ha ejecutado el programa, para mover la cámara se utilizan las teclas \textit{Arrow-up}, \textit{Arrow-left}, \textit{Arrow-right} y \textit{Arrow-down}.La tecla \textit{Arrow-up} es para mover la cámara hacia adelante, la tecla \textit{Arrow-left} es para rotar la cámara hacia la izquierda, la tecla \textit{Arrow-right} es para rotar la cámara hacia la derecha y la tecla \textit{Arrow-down} es para mover la cámara hacia atrás.\\
+
+        Para visualizar los voxeles, se utilizan las teclas \textit{A}, \textit{B} y \textit{C}. Aprentando la tecla \textit{A} se visualizan los voxles asociados a la temperatura \textit{a}, aprentando la tecla \textit{B} se visualizan los voxles asociados a la temperatura \textit{b} y aprentando la tecla \textit{C} se visualizan los voxles asociados a la temperatura \textit{c}.\\
+
+        Apretando la tecla \textit{ESC} se cierra el programa.
+
+    \item \textbf{\underline{Resultados:}} 
+
+        Inicialmente, se visualiza el acuario solo con los peces(sin voxeles). Los peces de tipo \textit{a} son rosados, los peces de tipo \textit{b} son verdes y los peces de tipo \textit{c} son azules.
+        \insertimage[]{img/3.png}{width=10cm}{Visualización peces}
+
+
+        Al apretar la tecla \textit{A}, aparecen los voxeles del tipo \textit{a}.
+        \insertimage[]{img/3.png}{width=10cm}{Visualización peces y voxles tipo \textit{a}}
+
+        Luego, al apretar la tecla \textit{C}, aparecen los voxeles del tipo \textit{c}.
+        \insertimage[]{img/3.png}{width=10cm}{Visualización peces y voxles tipo \textit{a} y \textit{c}}
+
+        Después, al apretar la tecla \textit{C}, desparecen los voxeles del tipo \textit{c} y al apretar la tecla \textit{B}, aparecen los voxeles del tipo \textit{b}.
+
+        \insertimage[]{img/6.png}{width=10cm}{El auto avanza hacia adelante.}  
+
+        De esa forma, dependiendo que se desee ver, se apretan las teclas respectivas.
+
+\end{enumerate}
+
+% FIN DEL DOCUMENTO
+\end{document}
