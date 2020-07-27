@@ -409,14 +409,14 @@ INPUT .\img\2.png
 INPUT .\img\2.png
 INPUT .\img\2.png
 INPUT .\img\2.png
+INPUT C:\Users\Matia\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr10.tfm
+INPUT C:\Users\Matia\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmri10.tfm
+INPUT C:\Users\Matia\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ts1-lmri10.tfm
 INPUT img\3.png
 INPUT .\img\3.png
 INPUT .\img\3.png
 INPUT .\img\3.png
 INPUT .\img\3.png
-INPUT C:\Users\Matia\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr10.tfm
-INPUT C:\Users\Matia\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmri10.tfm
-INPUT C:\Users\Matia\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ts1-lmri10.tfm
 INPUT img\4.png
 INPUT .\img\4.png
 INPUT .\img\4.png
@@ -432,11 +432,6 @@ INPUT .\img\6.png
 INPUT .\img\6.png
 INPUT .\img\6.png
 INPUT .\img\6.png
-INPUT img\7.png
-INPUT .\img\7.png
-INPUT .\img\7.png
-INPUT .\img\7.png
-INPUT .\img\7.png
 INPUT main.aux
 INPUT C:\Users\Matia\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-ts1.enc
 INPUT C:\Users\Matia\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-ec.enc

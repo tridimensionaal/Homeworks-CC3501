@@ -15,8 +15,8 @@
 \documentclass[letterpaper,11pt,oneside]{article}
 
 % INFORMACIÓN DEL DOCUMENTO
-\def\titulodelinforme {Informe Tarea N°1}
-\def\temaatratar {OpenGL 2D}
+\def\titulodelinforme {Informe Tarea N°2}
+\def\temaatratar {OpenGL 3D}
 \def\autordeldocumento {Matías Seda}
 \def\nombredelcurso {Modelación y computación Gráfica para Ingenieros}
 \def\codigodelcurso {CC3501-1}
@@ -87,39 +87,38 @@
 \begin{enumerate}
     \item \textbf{\underline{Solución propuesta:}} 
 
-        El programa implementa el patrón de diseño \textit{Modelo-Vista-Controlador}. A grandes, la lógica del programa es la siguiente;
-        \insertimage[]{img/1.png}{width=10cm}{Lógica del programa.}
+        El programa implementa el patrón de diseño \textit{Modelo-Vista-Controlador} para generar un juego de autos de carreras. A grandes rasgos, la lógica del programa es la siguiente;
+        \insertimage[]{img/1.png}{width=15cm}{Lógica del programa.}
+
+        Respecto al modelo, la pista fue generada a través de una figura geométrica basada en una\textit{rounded nonuniform spline} y texturas, el auto de carrera fue generado a través de un conjunto de figuras geométricas y texturas y la decoración de la escena fue generada a través de un conjunto de figuras geométricas y texturas.\\
+
+        Para visualizar la escena, se utilizó una vista 3D modelada a través de una cámara en cóodenadas cilíndricas y para controlar los movimentos del auto de carreras, se utilizó una aplicación de controlador.
 
     \item \textbf{\underline{Instrucciones de ejecución:}} 
 
-        Via terminal, se debe dirigir a la carpeta \textit{tarea1b} que contiene el programa y ejecutar via terminal el archivo \textit{tarea1b.py} agregando un número que representa la cantidad de naves enemigas que se desean colocar en el juego. En la siguiente foto se ejemplifica lo dicho, agregando 10 naves enemigas:
-
-        \insertimage[]{img/2.png}{width=10cm}{Ejecuntado el programa vía terminal.}
-
-
-        Ahora, cuando se ha ejecutado el programa, para mover la nave se utilizan las teclas \textit{W}, \textit{A}, \textit{D} y \textit{S}. La tecla \textit{W} es para mover la nave hacia adelante, la tecla \textit{A} es para mover la nave hacia la izquierda, la tecla \textit{D} es para mover la nave hacia la derecha y la tecla \textit{S} es para mover la nave hacia atrás. Apretando la tecla \textit{SPACE} la nave dispara y con la tecla \textit{ESC} se cierra el programa.
+        Via terminal, se debe dirigir a la carpeta \textit{tarea2b} que contiene el programa y ejecutar via terminal el archivo \textit{tarea2b.py}. En la siguiente foto se ejemplifica lo dicho: 
+        \insertimage[]{img/2.png}{width=15cm}{Ejecuntado el programa vía terminal.}
 
 
+        Ahora, cuando se ha ejecutado el programa, para mover el auto se utilizan las teclas \textit{Arrow-up}, \textit{Arrow-left} y \textit{Arrow-right}. La tecla \textit{Arrow-up} es para mover el auto de carreras hacia adelante, la tecla \textit{Arrow-left} es para rotar el auto de carreras hacia la izquierda y la tecla \textit{Arrow-right} es para rotar el auto hacia la derecha. Apretando la tecla \textit{ESC} se cierra el programa.
     \item \textbf{\underline{Resultados:}} 
 
-        Inicialmente, el juego empieza con 1 nave ememiga.
+        El auto comienza en la posición inicial de la pista. La posición inicial de la pista viene marcada por dos cajas. En la siguiente imagen se muestra la situación inicial del juego.
         \insertimage[]{img/3.png}{width=10cm}{Situación inicial del juego.}
 
-        En el trasncurso del juego, van apareciendo más naves enemigas (hasta el máximo dado al ejecutar el programa). La nave del jugador tiene que disparar un disparado y alcanzar una nave enemiga para eliminarla.
-        \insertimage[]{img/4.png}{width=10cm}{El disparo rojo es un disparo de la nave del jugador.}
 
-        Las naves enemigas, constantemente se desplazan hacia el lado y al llegar al borde derecho, se desplazan hacia abajo. Las naves enemigas cada cierto tiempo, disparan un disparo en línea recta. 
-        \insertimage[]{img/5.png}{width=10cm}{Los disparos azules son disparos de las naves enemigas.}
+        Al mantener apretada la tecla \textit{Arrow-up}, al auto avanza hacia adelante.
+        \insertimage[]{img/4.png}{width=10cm}{El auto avanza hacia adelante.}  
 
-        El jugador gana cuando elimina todas las naves enemigas.
-        \insertimage[]{img/6.png}{width=10cm}{Display cuando el jugador gana.}
+        Cuando hay una curva en la pista, para mantener el auto en movimiento en la pista, se mantiene apretada la tecla \textit{Arrow-up} para avanzar hacia adelante y, al mismo tiempo, se mantiene apretada la tecla \textit{Arrow-left} o \textit{Arrow-right} para girar el auto. De esa forma, el auto avanza hacia adelante mientras rota, es decir, el auto se mueve curvilíneamte. 
+        \insertimage[]{img/5.png}{width=10cm}{El auto avanzando en la curva}
 
-        El jugador pierda cuando es alcanzado 3 veces por disparos enemigos, cuando choca contra una nave enemiga o cuando una nave enemiga alcanza la parte inferior de la pantalla.
-        \insertimage[]{img/7.png}{width=10cm}{Display cuando pierde el jugador.}
+        El auto de carreras, cuando se encuentra nuevamente con las cajas iniciales, significa que dió una vuelta completa.
+        \insertimage[]{img/6.png}{width=10cm}{El auto completando una vuelta.}
+
+        Para terminar el juego, se debe apretar la tecla \textit{ESC}.
 
 \end{enumerate}
-
-
 
 
 % FIN DEL DOCUMENTO

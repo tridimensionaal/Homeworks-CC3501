@@ -1,0 +1,6 @@
+En esta séptima versión, se realizaron los siguientes avances:
+
+1- Se afinaron detalles para el correcto funcionamiento del programa.
+2- Se agregó el vídeo y el informe
+
+

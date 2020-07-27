@@ -1,5 +1,0 @@
-En esta quinta versión, se realizaron los siguientes avances:
-
-1- Se afinaron detalles para el correcto funcionamiento del programa.
-
-

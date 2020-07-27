@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.5.6)  9 MAY 2020 01:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7400 64-bit) (preloaded format=pdflatex 2020.5.6)  21 JUN 2020 00:07
 entering extended mode
 **./main.tex
 (main.tex
@@ -1472,57 +1472,52 @@ Package pdftex.def Info: ./img/departamentos/fcfm.pdf  used on input line 14.
 File: img/1.png Graphic file (type png)
 <use img/1.png>
 Package pdftex.def Info: img/1.png  used on input line 91.
-(pdftex.def)             Requested size: 284.52756pt x 133.83249pt.
-<img/2.png, id=18, 576.65437pt x 277.78781pt>
+(pdftex.def)             Requested size: 426.79134pt x 200.7528pt.
+<img/2.png, id=18, 1309.89375pt x 473.77pt>
 File: img/2.png Graphic file (type png)
 <use img/2.png>
-Package pdftex.def Info: img/2.png  used on input line 97.
-(pdftex.def)             Requested size: 284.52756pt x 137.06667pt.
-<img/3.png, id=19, 680.5425pt x 476.53032pt>
-File: img/3.png Graphic file (type png)
-<use img/3.png>
-Package pdftex.def Info: img/3.png  used on input line 106.
-(pdftex.def)             Requested size: 284.52756pt x 199.23245pt.
+Package pdftex.def Info: img/2.png  used on input line 100.
+(pdftex.def)             Requested size: 426.79134pt x 154.3638pt.
  [1
 
- <./img/1.png> <./img/2.png>]
-<img/4.png, id=33, 676.77844pt x 468.24937pt>
+ <./img/1.png>]
+<img/3.png, id=30, 896.34875pt x 627.34375pt>
+File: img/3.png Graphic file (type png)
+<use img/3.png>
+Package pdftex.def Info: img/3.png  used on input line 107.
+(pdftex.def)             Requested size: 284.52756pt x 199.13634pt.
+<img/4.png, id=31, 897.3525pt x 620.3175pt>
 File: img/4.png Graphic file (type png)
 <use img/4.png>
-Package pdftex.def Info: img/4.png  used on input line 109.
-(pdftex.def)             Requested size: 284.52756pt x 196.86345pt.
-<img/5.png, id=34, 679.78969pt x 476.53032pt>
+Package pdftex.def Info: img/4.png  used on input line 111.
+(pdftex.def)             Requested size: 284.52756pt x 196.67886pt.
+ [2 <./img/2.png> <./img/3.png>]
+<img/5.png, id=41, 907.39pt x 630.355pt>
 File: img/5.png Graphic file (type png)
 <use img/5.png>
-Package pdftex.def Info: img/5.png  used on input line 112.
-(pdftex.def)             Requested size: 284.52756pt x 199.45059pt.
- [2 <./img/3.png> <./img/4.png>]
-<img/6.png, id=41, 679.78969pt x 474.27188pt>
+Package pdftex.def Info: img/5.png  used on input line 114.
+(pdftex.def)             Requested size: 284.52756pt x 197.65874pt.
+<img/6.png, id=42, 897.3525pt x 613.29124pt>
 File: img/6.png Graphic file (type png)
 <use img/6.png>
-Package pdftex.def Info: img/6.png  used on input line 115.
-(pdftex.def)             Requested size: 284.52756pt x 198.50533pt.
-<img/7.png, id=42, 770.88pt x 578.16pt>
-File: img/7.png Graphic file (type png)
-<use img/7.png>
-Package pdftex.def Info: img/7.png  used on input line 118.
-(pdftex.def)             Requested size: 284.52756pt x 213.39536pt.
- [3 <./img/5.png> <./img/6.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 126.
-[4 <./img/7.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 126.
+Package pdftex.def Info: img/6.png  used on input line 117.
+(pdftex.def)             Requested size: 284.52756pt x 194.4511pt.
+ [3 <./img/4.png> <./img/5.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 125.
+ [4 <./img/6.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 125.
  (main.aux
 LaTeX Info: Redefining \. on input line 23.
 LaTeX Info: Redefining \% on input line 23.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 126.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 126.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 125.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 125.
  ) 
 Here is how much of TeX's memory you used:
- 24220 strings out of 480930
- 366877 string characters out of 2899762
+ 24213 strings out of 480930
+ 366792 string characters out of 2899762
  840084 words of memory out of 3000000
- 39511 multiletter control sequences out of 15000+200000
+ 39506 multiletter control sequences out of 15000+200000
  577144 words of font info for 68 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  44i,16n,90p,17757b,2204s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1534,10 +1529,10 @@ lmr10.pfb><C:/Users/Matia/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
 lm/lmr12.pfb><C:/Users/Matia/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
 ic/lm/lmr17.pfb><C:/Users/Matia/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
 ublic/lm/lmri10.pfb>
-Output written on main.pdf (5 pages, 838205 bytes).
+Output written on main.pdf (5 pages, 1007592 bytes).
 PDF statistics:
- 81 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
- 16 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 84 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
+ 15 named destinations out of 1000 (max. 500000)
+ 40 words of extra memory for PDF output out of 10000 (max. 10000000)
 

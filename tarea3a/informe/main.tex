@@ -86,7 +86,7 @@
 % ======================= INICIO DEL DOCUMENTO =======================
 \begin{enumerate}
     \item \textbf{\underline{Solución propuesta:}} 
-        Se tienen dos programas. El primer programa resuelve el problema de laplace para las temperaturas en el acuario y guarda la información en un archivo \textit{solution.npy} y el segundo programa carga la información del archivo \textit{solution.npy} y visualiza la información. El programa de visualización implementa el patrón de diseño \textit{Modelo-Vista-Controlador} para visualizar el acuario con los peces y voxeles. Para visualizar la escena, se utilizó una vista 3D modelada a través de una cámara en cóodenadas cilíndricas y para controlar los movimentos del auto de carreras, se utilizó una aplicación de controlador.\\
+        Se tienen dos programas. El primer programa resuelve el problema de laplace para las temperaturas en el acuario y guarda la información en un archivo \textit{solution.npy} y el segundo programa carga la información del archivo \textit{solution.npy} y visualiza la información. El programa de visualización implementa el patrón de diseño \textit{Modelo-Vista-Controlador} para visualizar el acuario con los peces y voxeles. Para visualizar la escena, se utilizó una vista 3D modelada a través de una cámara en cóodenadas cilíndricas y para controlar los movimentos de la cámara y los voxeles, se utilizó una aplicación de controlador.\\
 
         A grandes rasgos, la lógica y la interacción de estos dos programas es la siguiente:
         \insertimage[]{img/0.png}{width=10cm}{Lógica del programa.}
@@ -116,14 +116,13 @@
 
 
         Al apretar la tecla \textit{A}, aparecen los voxeles del tipo \textit{a}.
-        \insertimage[]{img/3.png}{width=10cm}{Visualización peces y voxles tipo \textit{a}}
+        \insertimage[]{img/4.png}{width=10cm}{Visualización peces y voxles tipo \textit{a}}
 
         Luego, al apretar la tecla \textit{C}, aparecen los voxeles del tipo \textit{c}.
-        \insertimage[]{img/3.png}{width=10cm}{Visualización peces y voxles tipo \textit{a} y \textit{c}}
+        \insertimage[]{img/5.png}{width=10cm}{Visualización peces y voxles tipo \textit{a} y \textit{c}}
 
-        Después, al apretar la tecla \textit{C}, desparecen los voxeles del tipo \textit{c} y al apretar la tecla \textit{B}, aparecen los voxeles del tipo \textit{b}.
-
-        \insertimage[]{img/6.png}{width=10cm}{El auto avanza hacia adelante.}  
+        Después, al apretar la tecla \textit{A}, desparecen los voxeles del tipo \textit{a} y al apretar la tecla \textit{B}, aparecen los voxeles del tipo \textit{b}.
+        \insertimage[]{img/6.png}{width=10cm}{Visualización peces y voxles tipo \textit{b} y \textit{c}}
 
         De esa forma, dependiendo que se desee ver, se apretan las teclas respectivas.
 
