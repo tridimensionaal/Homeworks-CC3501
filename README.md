@@ -1,7 +1,5 @@
-# Proyectos curso Modelación y Computación Gráfica para Ingenieros
-### Matías Salim Seda Auil, estudiante de Ingeniería Civil en Computación
+# Homeworks-CC3501
+Homeworks for the course "Modelación y Computación Gráfica para Ingenieros"
 
-El siguiente repositorio consiste en los tres proyectos que se desarrollaron el semestre de otoño del año 2020 en el curso Modelación y Computación Gráfica para Ingenieros, curso obligatorio del quinto semestres de la carrera de Ingeniería Civil en Computación en la Universidad de Chile.
-
-En cada una de las carpetas de los proyectos existe un archivo PDF llamado "informe.pdf" que explica en qué consiste cada proyecto, respectivamente.
+The following repository contains the three projects developed in the fall term of the 2020 in the course "Modelación y Computación Gráfica para Ingenieros" of the degree in Computer Science at Universidad de Chile.
 
